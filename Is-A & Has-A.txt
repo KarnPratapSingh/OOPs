@@ -1,0 +1,65 @@
+"The Bike and Pulsar classes have an {IS-A} relationship, whereas Pulsar and Engine classes have an {HAS-A} relationship"
+
+
+
+public class Bike  
+{  
+    private String color;  
+    private int maxSpeed;  
+    public void bikeInfo()  
+    {  
+        System.out.println("Bike Color= "+color + " Max Speed= " + maxSpeed);  
+    }  
+    public void setColor(String color)  
+    {  
+        this.color = color;  
+    }  
+    public void setMaxSpeed(int maxSpeed)  
+    {  
+        this.maxSpeed = maxSpeed;  
+    }  
+}  
+
+// In the code above the Bike class has a few instance variables and methods.
+
+
+public class Pulsar extends Bike  
+{  
+    public void PulsarStartDemo()  
+    {  
+        Engine PulsarEngine = new Engine();  
+        PulsarEngine.stop();  
+    }  
+} 
+
+// Pulsar is a type of bike that extends the Bike class that shows that Pulsar is a Bike. 
+// Pulsar also uses an Engine's method, stop, using composition. So it shows that a Pulsar has an Engine.
+
+
+public class Engine  
+{  
+    public void start()  
+    {  
+        System.out.println("Started:");  
+    }  
+    public void stop()  
+    {  
+        System.out.println("Stopped:");  
+    }  
+}  
+
+// The Engine class has the two methods start( ) and stop( ) that are used by the Pulsar class.
+
+
+
+public class Demo  
+{  
+    public static void main(String[] args)  
+    {  
+        Pulsar myPulsar = new Pulsar();  
+        myPulsar.setColor("BLACK");  
+        myPulsar.setMaxSpeed(136);  
+        myPulsar.bikeInfo();  
+       myPulsar.PulsarStartDemo();  
+    }  
+}  

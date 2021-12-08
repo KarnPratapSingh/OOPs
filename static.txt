@@ -1,0 +1,231 @@
+-it is a non access modifier. (just like abstract or final)
+- can use it with variables(class level only, not local), methods, blocks, nested class(not outer class)
+- static variable belongs to class, eg:
+
+class test{
+static int a=10;
+}
+
+class demo{
+p.s.v.m(str args){
+sopln(test.a);
+}
+}
+output: 10.
+
+-Use of static variables is memory management. If there's any prperty that is common for all objs thn declare it as static at class level.
+eg:
+public class test{
+    String name; //instance variable; belongs to obj
+    static String CN="Apple"; //static variable; belongs to class
+    test(String name){
+        this.name=name;
+       
+    }
+    public void disp(){
+        
+        System.out.println(this.name+" "+this.CN+" "+abc.cbn);// Karn Apple kpop
+    }
+    public static void main(String[]args){
+        test obj1=new test("Karn");
+        obj1.disp();
+        test obj2=new test("Karn2");
+        obj2.disp();
+        System.out.println(obj1.CN);
+        
+    }
+}
+
+class abc{
+    static String cbn="kpop";
+}
+
+- Counter program using static:
+
+public class test{
+    
+     int count=0; new copies are made for every new obj
+    test(){
+       this.count=this.count+1;
+    }
+   
+    public static void main(String[]args){
+        test obj1=new test();
+        System.out.println(obj1.count);
+        test obj2=new test();
+        System.out.println(obj2.count);
+        System.out.println(obj1.count);
+        
+    }
+}
+
+output is :
+1
+1
+1
+
+
+public class test{
+    
+   static  int count=0; //belongs to class, shared by all objs
+    test(){
+       this.count=this.count+1;
+    }
+   
+    public static void main(String[]args){
+        test obj1=new test();
+        System.out.println(obj1.count);
+        test obj2=new test();
+        System.out.println(obj2.count);
+        System.out.println(obj1.count);
+        
+    }
+}
+
+output is :
+1
+2
+2
+
+
+
+- Now we will see static methods:
+
+- Static method belongs to class not objs
+- Static methods can be called directly using class's name.
+- Such static methods are also used for memory management. Because now we do not need to create any obj for calling a method.
+- example:
+public class test{
+    
+    public static int calc(){
+        System.out.println("returning Static");
+        return 1;
+    }
+    public int ABC(){
+        System.out.println("returning NON-Static");
+        return 2;
+    }
+   
+    public static void main(String[]args){
+        test obj=new test();
+        System.out.println(obj.ABC());
+        int a=test.calc(); or int a=calc(); //as calc() belongs to class.
+        System.out.println(a);
+        
+    }
+}
+
+
+
+- You can call static methods of other non static classes as well:
+public class test{
+    
+    public static int calc(){
+        System.out.println("returning Static");
+        return 1;
+    }
+    public int ABC(){
+        System.out.println("returning NON-Static");
+        return 2;
+    }
+   
+    public static void main(String[]args){
+        test obj=new test();
+        System.out.println(obj.ABC());
+        int a=calc(); //correct as calc()belongs to class test
+        System.out.println(a);
+        int b=test2.calc2();
+        System.out.println(b);
+        
+    }
+}
+
+class test2{
+    public static int calc2(){
+        System.out.println("static method of new class");
+        return 3;
+    }
+}
+
+
+-Some rules of static methods:
+:belong to class
+:accessed directly by class name
+:can access only static data, not instance data.
+public class test{
+    int i=10;
+    static int j=90;
+    public static int calc(){
+        System.out.println("returning Static");
+        j=j+1;               //valid
+        this.i=this.i+1;     //invalid
+        return 1;
+    }
+
+:can access only other static methods
+public class test{
+    int i=10;
+    static int j=90;
+    public static int calc(){
+        System.out.println("returning Static");
+        j=j+1; //valid
+        // this.i=this.i+1;//invalid
+        employee();
+        return 1;
+    }
+    
+    public static void employee(){
+        System.out.println("employee");
+        
+    }
+
+:this and super keywords not used with them
+public class test{
+    int i=10;
+    static int j=90;
+    public static int calc(){
+        System.out.println("returning Static");
+        this.j=this.j+1;               //INvalid (can't use this or super with them)
+        this.i=this.i+1;     //invalid
+        return 1;
+    }
+
+
+- Now we will see static blocks:
+
+- There is no way to call a static block. It is executed when the class is loaded.
+
+- class test{
+static{
+System.out.println("Hello");
+}
+}
+
+output:error: main method not found  (only if jdk version is 1.6 and above. In these versions the way program is loaded in memory was changed)
+
+- class test{
+static{
+System.out.println("Hello");
+}
+
+psvm(String args){
+test t = new test();
+System.out.println("main meth");
+}
+}
+
+output: Hello
+main meth
+
+first the static block will be executed. After that anything else
+
+- We can use multiple static blocks.
+
+These blocks are executed in the sequence in which they are written(top to bottom execution)
+
+- First always all the static members and static blocks are executed.
+
+- So we always write only that code in static block which we want to execute at the loading of class time. first and foremost
+- Also they are used to initialize static members
+-
+

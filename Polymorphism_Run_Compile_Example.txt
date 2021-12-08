@@ -1,0 +1,61 @@
+
+1. Compile Time Polymorphism : (Overloading) 
+
+class CompileTimePolymorphism{
+   
+   public int add(int x, int y){ 
+   return x+y;
+   }
+   
+   public int add(int x, int y, int z){
+   return x+y+z;
+   }
+   
+   public int add(double x, int y){ 
+   return (int)x+y;
+   }
+   
+   public int add(int x, double y){ 
+   return x+(int)y;
+   }
+}
+class Test{
+   public static void main(String[] args){
+   CompileTimePolymorphism demo=new CompileTimePolymorphism();
+   
+   System.out.println(demo.add(2,3));
+   
+   System.out.println(demo.add(2,3,4));
+   
+   System.out.println(demo.add(2,3.4));
+   
+   System.out.println(demo.add(2.5,3)); 
+   }
+}
+
+
+
+
+
+
+2. Run Time Polymorphism : (Overriding)
+
+class Animals{
+   public void move(){
+   System.out.println(“Animals can move!!”);
+   }
+}
+class Tiger extends Animals{
+   public void move(){
+   System.out.println(“Tiger can move too!!”);
+   }
+}
+class Test{
+   public static void main(String[] args){
+   Animals obj1 = new Animals();
+   Animals obj2 = new Tiger();
+
+   obj1.move(); //output is "Animals can move!!"
+   obj2.move(); // output is "Tiger can move too!!"
+   }
+}
